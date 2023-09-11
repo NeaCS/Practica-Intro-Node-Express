@@ -1,12 +1,18 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const cors = require('cors')
 
 app.listen(3000, 
     console.log('Example app listening on port 3000!')
 )
 
+app.use(cors())
+
+
 app.use(express.json())
+
+
 
 app.get('/minombre', (req, res) => {
     res.send('mi nombres es Naldi Castro')
@@ -19,10 +25,7 @@ app.get('/fecha', (req,res)=> {
     res.send(fecha)
 })
 
-app.get('/productos', (req, res)=> {
-    const productos = require('./productos.json')
-    res.send(JSON.stringify(productos))
-}) 
+
 
 app.get("/productos", (req, res) => {
     const productos = '[{"hola": "hola"}, {"adios": "adios"}]'
@@ -46,6 +49,11 @@ app.get("/productos", (req, res) => {
         res.send('producto agregado')
     }) */
 
+    app.get('/productos', (req, res)=> {
+        const productos = require('./productos.json')
+        res.json((productos))
+    }) 
+
     app.post('/usuarios', (req, res) => {
         const usuarios = require('./usuarios.json')
         const nuevosUsuarios = req.body
@@ -68,14 +76,17 @@ app.get("/productos", (req, res) => {
 
     })
 
-    app.put('/usuarios/:id', (req, res) => {
-        const id = req.params.id;
+    app.put('/usuarios/:nombre', (req, res) => {
+        const nombre = req.params.nombre;
         const modificacion = req.body 
         const usuarios = require('./usuarios.json')
-        //busco y el objeto que coincide con el id del parámetro
-        const index = usuarios.findIndex(usuario => usuario.id == id)
-        //ubico el nuevo producto (body) en el index que viene de los parámetros
-        productos[index] = modificacion
+        const index = usuarios.findIndex(usuario => usuario.nombre == nombre)
+        usuarios[index] = modificacion
         fs.writeFileSync('./usuarios.json', JSON.stringify(usuarios))
-        res.send('producto modificado')
+        res.send('usuario modificado')
+    })
+
+    app.get('/archivo', (req, res) =>{
+        res.sendFile(__dirname + '/test.html')
+        console.log(__dirname)
     })
