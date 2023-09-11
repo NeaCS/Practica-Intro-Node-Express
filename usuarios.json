@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Usuario1",
+    "edad": 30,
+    "ciudad": "Ciudad1",
+    "profesion": "Profesión1",
+    "correo": "usuario1@example.com"
+  },
+  {
+    "nombre": "Usuario2",
+    "edad": 25,
+    "ciudad": "Ciudad2",
+    "profesion": "Profesión2",
+    "correo": "usuario2@example.com"
+  },
+  {
+    "nombre": "Usuario3",
+    "edad": 42,
+    "ciudad": "Ciudad3",
+    "profesion": "Profesión3",
+    "correo": "usuario3@example.com"
+  }
+]
